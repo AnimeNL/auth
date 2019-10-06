@@ -1,6 +1,6 @@
 # AnimeCon Authentication
 Pre-requisites:
-* ^7.1.3
+* ^7.3
 * Anplan database
 
 ## Generate certificates
