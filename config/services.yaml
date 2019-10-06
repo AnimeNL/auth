@@ -27,5 +27,7 @@ services:
     # please note that last definitions always *replace* previous ones
 
     App\EventListener\UserResolveListener:
+        bind:
+            $updatePassword: '%env(bool:OAUTH2_UPDATE_HASH)%'
         tags:
             - { name: kernel.event_listener, event: trikoder.oauth2.user_resolve, method: onUserResolve }

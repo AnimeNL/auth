@@ -19,15 +19,24 @@ final class UserResolveListener
      * @var UserPasswordEncoderInterface
      */
     private $userPasswordEncoder;
+    /**
+     * @var bool
+     */
+    private $updatePassword;
 
     /**
      * @param UserProviderInterface        $userProvider
      * @param UserPasswordEncoderInterface $userPasswordEncoder
+     * @param bool                         $updatePassword
      */
-    public function __construct(UserProviderInterface $userProvider, UserPasswordEncoderInterface $userPasswordEncoder)
-    {
+    public function __construct(
+        UserProviderInterface $userProvider,
+        UserPasswordEncoderInterface $userPasswordEncoder,
+        bool $updatePassword = false
+    ) {
         $this->userProvider = $userProvider;
         $this->userPasswordEncoder = $userPasswordEncoder;
+        $this->updatePassword = $updatePassword;
     }
 
     /**
@@ -46,7 +55,7 @@ final class UserResolveListener
             return;
         }
 
-        if ($user->getEncoderName() === 'legacy') {
+        if ($this->updatePassword && $user->getEncoderName() === 'legacy') {
             $this->userProvider->updatePassword($user, $event->getPassword());
         }
 
