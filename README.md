@@ -16,7 +16,7 @@ Copy `.env` to `.env.local` and update to the values for your environment
 
 ## Create the database
 ```shell script
-php bin/console doctrine:database:create
+php bin/console doctrine:database:create --if-not-exists
 php bin/console doctrine:schema:update --force 
 ```
 
