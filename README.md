@@ -5,8 +5,10 @@ Pre-requisites:
 
 ## Generate certificates
 ```sh
+mkdir -p var/oauth
 openssl genrsa -passout pass:<PASSWORD> -out var/oauth/private.key 2048
 openssl rsa -in var/oauth/private.key -passin pass:<PASSWORD> -pubout -out var/oauth/public.key
+composer install
 ```
 
 ## Update configuration
