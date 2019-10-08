@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {% if block('title') is defined %}{{ block('title')|raw }} - {% endif %}
+            AnimeCon
+        </title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            {#TODO: MOVE TO WEBPACK ENCORE#}
+            .container {
+                margin-top: 50px;
+            }
+
+            .logo {
+                width: 150px;
+                height: 150px;
+                margin-bottom: 10px;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+        </style>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <div class="container">
+            {#TODO: DUMP CENTER#}
+            <center><img src="/assets/logo.png" alt="AnimeCon logo" class="logo"></center>
+            {% block body %}
+            {% endblock %}
+        </div>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
