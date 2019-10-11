@@ -5,7 +5,6 @@ namespace App\Provider;
 use App\Entity\Anplan\User;
 use App\Repository\Anplan\UserRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -45,13 +44,13 @@ class UserProvider implements UserProviderInterface
      *
      * @param string $username The username
      *
-     * @return UserInterface
+     * @return User|null
      *
      * @throws UsernameNotFoundException if the user is not found
      */
-    public function loadUserByUsername($username)
+    public function loadUserByUsername($username): ?User
     {
-        $user = $this->userRepo->findOneBy(['email' => $username]);
+        $user = $this->userRepo->findOneByUsername($username);
 
         if (!$user) {
             $exception = new UsernameNotFoundException();
@@ -90,9 +89,17 @@ class UserProvider implements UserProviderInterface
      */
     public function supportsClass($class)
     {
-        return true;
+        return $class === User::class;
     }
 
+    /**
+     * Updates password hashing method
+     *
+     * @param User   $user
+     * @param string $password
+     *
+     * @return User
+     */
     public function updatePassword(User $user, string $password): User
     {
         $user->setPassword(password_hash($password, PASSWORD_DEFAULT));

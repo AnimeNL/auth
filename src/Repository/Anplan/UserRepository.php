@@ -13,5 +13,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
-
+    public function findOneByUsername(string $username): ?User
+    {
+        return $this->findOneBy(['email' => $username]);
+    }
 }

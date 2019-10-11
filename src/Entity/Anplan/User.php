@@ -2,9 +2,11 @@
 
 namespace App\Entity\Anplan;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Trikoder\Bundle\OAuth2Bundle\Model\Scope as AuthScope;
 
 /**
  * @ORM\Table(name="jpop__visitors")
@@ -31,6 +33,21 @@ class User implements UserInterface, EncoderAwareInterface
      * @ORM\Column(type="string", name="vis_password")
      */
     private $password;
+
+    /**
+     * @var ArrayCollection|Scope[]
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\Anplan\Scope",
+     *     mappedBy="user",
+     *     fetch="EAGER"
+     * )
+     */
+    private $scopes;
+
+    public function __construct()
+    {
+        $this->scopes = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -96,7 +113,16 @@ class User implements UserInterface, EncoderAwareInterface
      */
     public function getRoles()
     {
-        return [];
+        $scopes = [];
+        foreach ($this->scopes->toArray() as $scope) {
+            if (!$scope->isActive()) {
+                continue;
+            }
+
+            $scopes[] = new AuthScope($scope->getScope());
+        }
+
+        return $scopes;
     }
 
     /**

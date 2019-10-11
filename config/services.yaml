@@ -31,3 +31,7 @@ services:
             $updatePassword: '%env(bool:OAUTH2_UPDATE_HASH)%'
         tags:
             - { name: kernel.event_listener, event: trikoder.oauth2.user_resolve, method: onUserResolve }
+
+    App\EventListener\ScopeResolveListener:
+        tags:
+            - { name: kernel.event_listener, event: trikoder.oauth2.scope_resolve, method: onScopeResolve }
