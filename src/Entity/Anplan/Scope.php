@@ -11,51 +11,38 @@ use Doctrine\ORM\Mapping as ORM;
 class Scope
 {
     /**
-     * @var int
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer", name="id")
      */
-    private $id;
+    private int $id;
 
     /**
-     * @var string
      * @ORM\Column(type="string", name="vir_right")
      */
-    private $scope;
+    private string $scope;
 
     /**
-     * @var bool
      * @ORM\Column(type="smallint", name="vir_active")
      */
-    private $active;
+    private bool $active;
 
     /**
-     * @var User
      * @ORM\ManyToOne(targetEntity="App\Entity\Anplan\User", inversedBy="scopes")
      * @ORM\JoinColumn(name="vir_id_visitor", referencedColumnName="vis_id_visitor", nullable=false)
      */
-    private $user;
+    private User $user;
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getScope(): string
     {
         return $this->scope;
     }
 
-    /**
-     * @return bool
-     */
     public function isActive(): bool
     {
         return $this->active;

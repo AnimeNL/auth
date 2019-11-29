@@ -4,7 +4,7 @@ namespace App\Provider;
 
 use App\Entity\Anplan\User;
 use App\Repository\Anplan\UserRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -12,22 +12,10 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserProvider implements UserProviderInterface
 {
-    /**
-     * @var UserRepository
-     */
-    private $userRepo;
+    private UserRepository $userRepo;
+    private ManagerRegistry $doctrine;
 
-    /**
-     * @var RegistryInterface
-     */
-    private $doctrine;
-
-    /**
-     * UserProvider constructor.
-     *
-     * @param RegistryInterface $doctrine
-     */
-    public function __construct(RegistryInterface $doctrine)
+    public function __construct(ManagerRegistry $doctrine)
     {
         $this->userRepo = $doctrine
             ->getManager('anplan')
