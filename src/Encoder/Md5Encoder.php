@@ -11,6 +11,11 @@ class Md5Encoder extends BasePasswordEncoder implements EncoderInterface
 
     /**
      * Encode a given string to produce an encoded string.
+     *
+     * @param int $firstLineOffset if first line needs to be shorter
+     * @param int $maxLineLength - 0 indicates the default length for this encoding
+     *
+     * @return string
      */
     public function encodeString(
         string $string,

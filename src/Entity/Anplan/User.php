@@ -15,21 +15,24 @@ use Trikoder\Bundle\OAuth2Bundle\Model\Scope as AuthScope;
 class User implements UserInterface, EncoderAwareInterface
 {
     /**
+     * @var int
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer", name="vis_id_visitor")
      */
-    private int $id;
+    private $id;
 
     /**
+     * @var string
      * @ORM\Column(type="string", name="vis_email")
      */
-    private string $email;
+    private $email;
 
     /**
+     * @var string
      * @ORM\Column(type="string", name="vis_password")
      */
-    private string $password;
+    private $password;
 
     /**
      * @var ArrayCollection|Scope[]
@@ -46,31 +49,49 @@ class User implements UserInterface, EncoderAwareInterface
         $this->scopes = new ArrayCollection();
     }
 
+    /**
+     * @return int
+     */
     public function getId(): int
     {
         return $this->id;
     }
 
+    /**
+     * @param int $id
+     */
     public function setId(int $id): void
     {
         $this->id = $id;
     }
 
+    /**
+     * @return string
+     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
+    /**
+     * @param string $email
+     */
     public function setEmail(string $email): void
     {
         $this->email = $email;
     }
 
+    /**
+     * @return string
+     */
     public function getPassword(): string
     {
         return $this->password;
     }
 
+    /**
+     * @param string $password
+     */
     public function setPassword(string $password): void
     {
         $this->password = $password;
@@ -108,16 +129,20 @@ class User implements UserInterface, EncoderAwareInterface
      * Returns the salt that was originally used to encode the password.
      *
      * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
      */
-    public function getSalt(): ?string
+    public function getSalt()
     {
         return null;
     }
 
     /**
      * Returns the username used to authenticate the user.
+     *
+     * @return string The username
      */
-    public function getUsername(): string
+    public function getUsername()
     {
         return $this->email;
     }
@@ -128,7 +153,7 @@ class User implements UserInterface, EncoderAwareInterface
      * This is important if, at any given point, sensitive information like
      * the plain-text password is stored on this object.
      */
-    public function eraseCredentials(): void
+    public function eraseCredentials()
     {
         $this->password = null;
     }
@@ -138,8 +163,10 @@ class User implements UserInterface, EncoderAwareInterface
      *
      * If the method returns null, the standard way to retrieve the encoder
      * will be used instead.
+     *
+     * @return string|null
      */
-    public function getEncoderName(): ?string
+    public function getEncoderName()
     {
         if (strpos($this->password, '$') !== false) {
             return 'new';

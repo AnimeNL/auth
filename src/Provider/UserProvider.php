@@ -12,9 +12,21 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserProvider implements UserProviderInterface
 {
-    private UserRepository $userRepo;
-    private ManagerRegistry $doctrine;
+    /**
+     * @var UserRepository
+     */
+    private $userRepo;
 
+    /**
+     * @var ManagerRegistry
+     */
+    private $doctrine;
+
+    /**
+     * UserProvider constructor.
+     *
+     * @param ManagerRegistry $doctrine
+     */
     public function __construct(ManagerRegistry $doctrine)
     {
         $this->userRepo = $doctrine

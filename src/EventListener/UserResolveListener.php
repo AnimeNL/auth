@@ -5,16 +5,33 @@ namespace App\EventListener;
 use App\Entity\Anplan\User;
 use App\Provider\UserProvider;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Trikoder\Bundle\OAuth2Bundle\Event\UserResolveEvent;
 
 final class UserResolveListener
 {
-    private UserProvider $userProvider;
-    private UserPasswordEncoderInterface $userPasswordEncoder;
-    private bool $updatePassword;
+    /**
+     * @var UserProvider
+     */
+    private $userProvider;
 
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $userPasswordEncoder;
+
+    /**
+     * @var bool
+     */
+    private $updatePassword;
+
+    /**
+     * @param UserProviderInterface        $userProvider
+     * @param UserPasswordEncoderInterface $userPasswordEncoder
+     * @param bool                         $updatePassword
+     */
     public function __construct(
-        UserProvider $userProvider,
+        UserProviderInterface $userProvider,
         UserPasswordEncoderInterface $userPasswordEncoder,
         bool $updatePassword = false
     ) {
@@ -23,6 +40,9 @@ final class UserResolveListener
         $this->updatePassword = $updatePassword;
     }
 
+    /**
+     * @param UserResolveEvent $event
+     */
     public function onUserResolve(UserResolveEvent $event): void
     {
         /** @var User $user */
