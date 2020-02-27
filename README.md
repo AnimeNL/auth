@@ -26,3 +26,14 @@ php bin/console trikoder:oauth2:create-client --grant-type=password --scope=anpl
 ```
 
 Use the information shown in this command (or list-clients) in your authentication call.
+
+## Get a token
+```shell script
+curl --location --request POST 'http://127.0.0.1:8001/token' \
+--header 'Content-Type: application/json' \
+--form 'grant_type=password' \
+--form 'client_id=~' \
+--form 'client_secret=~' \
+--form 'username=~' \
+--form 'password=~'
+```
