@@ -2,36 +2,18 @@
 
 namespace App\EventListener;
 
-use App\Entity\Anplan\User;
 use App\Provider\UserProvider;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Trikoder\Bundle\OAuth2Bundle\Event\UserResolveEvent;
 
 final class UserResolveListener
 {
-    /**
-     * @var UserProvider
-     */
-    private $userProvider;
+    private UserProvider $userProvider;
+    private UserPasswordEncoderInterface $userPasswordEncoder;
+    private bool $updatePassword;
 
-    /**
-     * @var UserPasswordEncoderInterface
-     */
-    private $userPasswordEncoder;
-
-    /**
-     * @var bool
-     */
-    private $updatePassword;
-
-    /**
-     * @param UserProviderInterface        $userProvider
-     * @param UserPasswordEncoderInterface $userPasswordEncoder
-     * @param bool                         $updatePassword
-     */
     public function __construct(
-        UserProviderInterface $userProvider,
+        UserProvider $userProvider,
         UserPasswordEncoderInterface $userPasswordEncoder,
         bool $updatePassword = false
     ) {
@@ -40,12 +22,8 @@ final class UserResolveListener
         $this->updatePassword = $updatePassword;
     }
 
-    /**
-     * @param UserResolveEvent $event
-     */
     public function onUserResolve(UserResolveEvent $event): void
     {
-        /** @var User $user */
         $user = $this->userProvider->loadUserByUsername($event->getUsername());
 
         if (null === $user) {
@@ -56,7 +34,7 @@ final class UserResolveListener
             return;
         }
 
-        if ($this->updatePassword && $user->getEncoderName() === 'legacy') {
+        if ($this->updatePassword && 'legacy' === $user->getEncoderName()) {
             $this->userProvider->updatePassword($user, $event->getPassword());
         }
 

@@ -8,14 +8,8 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
 class Md5Encoder extends BasePasswordEncoder implements EncoderInterface
 {
-
     /**
      * Encode a given string to produce an encoded string.
-     *
-     * @param int $firstLineOffset if first line needs to be shorter
-     * @param int $maxLineLength - 0 indicates the default length for this encoding
-     *
-     * @return string
      */
     public function encodeString(
         string $string,
@@ -29,7 +23,7 @@ class Md5Encoder extends BasePasswordEncoder implements EncoderInterface
     /**
      * Encodes the raw password.
      *
-     * @param string      $raw The password to encode
+     * @param string      $raw  The password to encode
      * @param string|null $salt The salt
      *
      * @return string The encoded password
@@ -46,8 +40,8 @@ class Md5Encoder extends BasePasswordEncoder implements EncoderInterface
      * Checks a raw password against an encoded password.
      *
      * @param string      $encoded An encoded password
-     * @param string      $raw A raw password
-     * @param string|null $salt The salt
+     * @param string      $raw     A raw password
+     * @param string|null $salt    The salt
      *
      * @return bool true if the password is valid, false otherwise
      *

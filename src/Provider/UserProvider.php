@@ -12,29 +12,14 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserProvider implements UserProviderInterface
 {
-    /**
-     * @var UserRepository
-     */
-    private $userRepo;
+    private UserRepository $userRepo;
+    private ManagerRegistry $doctrine;
 
-    /**
-     * @var ManagerRegistry
-     */
-    private $doctrine;
-
-    /**
-     * UserProvider constructor.
-     *
-     * @param ManagerRegistry $doctrine
-     */
-    public function __construct(ManagerRegistry $doctrine)
+    public function __construct(ManagerRegistry $doctrine, UserRepository $userRepo)
     {
-        $this->userRepo = $doctrine
-            ->getManager('anplan')
-            ->getRepository(User::class);
         $this->doctrine = $doctrine;
+        $this->userRepo = $userRepo;
     }
-
 
     /**
      * Loads the user for the given username.
@@ -43,8 +28,6 @@ class UserProvider implements UserProviderInterface
      * found.
      *
      * @param string $username The username
-     *
-     * @return User|null
      *
      * @throws UsernameNotFoundException if the user is not found
      */
@@ -89,16 +72,11 @@ class UserProvider implements UserProviderInterface
      */
     public function supportsClass($class)
     {
-        return $class === User::class;
+        return User::class === $class;
     }
 
     /**
-     * Updates password hashing method
-     *
-     * @param User   $user
-     * @param string $password
-     *
-     * @return User
+     * Updates password hashing method.
      */
     public function updatePassword(User $user, string $password): User
     {
