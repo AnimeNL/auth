@@ -1,9 +1,9 @@
 trikoder_oauth2:
-
     authorization_server:
         private_key: '%kernel.project_dir%/var/oauth/private.key'                     # Change this
         private_key_passphrase: '%env(string:OAUTH2_PASSPHRASE)%'      # Passphrase of the private key, if any
         encryption_key: '%env(string:OAUTH2_ENCRYPTION_KEY)%'   # (Optional) Change this
+        enable_refresh_token_grant: true
 
     resource_server:
         public_key: '%kernel.project_dir%/var/oauth/public.key'                       # Change this
