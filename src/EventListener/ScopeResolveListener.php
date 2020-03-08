@@ -2,9 +2,11 @@
 
 namespace App\EventListener;
 
+use App\Normalizer\ScopeNormalizer;
 use App\Provider\UserProvider;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Trikoder\Bundle\OAuth2Bundle\Event\ScopeResolveEvent;
+use Trikoder\Bundle\OAuth2Bundle\Model\Scope;
 
 final class ScopeResolveListener
 {
@@ -21,6 +23,7 @@ final class ScopeResolveListener
         if (!$user instanceof UserInterface) {
             return;
         }
-        $event->setScopes(...$user->getRoles());
+        $scopes = array_map(fn (Scope $scope) => ScopeNormalizer::normalize($scope), $user->getRoles());
+        $event->setScopes(...$scopes);
     }
 }

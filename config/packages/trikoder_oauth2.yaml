@@ -1,12 +1,43 @@
 trikoder_oauth2:
-
     authorization_server:
         private_key: '%kernel.project_dir%/var/oauth/private.key'                     # Change this
         private_key_passphrase: '%env(string:OAUTH2_PASSPHRASE)%'      # Passphrase of the private key, if any
         encryption_key: '%env(string:OAUTH2_ENCRYPTION_KEY)%'   # (Optional) Change this
-
     resource_server:
         public_key: '%kernel.project_dir%/var/oauth/public.key'                       # Change this
-
     persistence:
         doctrine: null
+    scopes:
+        - Admin
+        - Articles
+        - Core
+        - Dealer_Setup
+        - DeskAccess
+        - Event_Create
+        - Event_Edit
+        - Event_Setup
+        - Events
+        - Grant
+        - Grant_Badges
+        - Grant_Tickets
+        - HotelMaint
+        - Lookup
+        - LookupComments
+        - LookupMerch
+        - MerchMaint
+        - OrderSetup
+        - Organigram
+        - Payments
+        - Rights
+        - Security
+        - Stats
+        - Tech
+        - tickets.core
+        - tickets.dealers
+        - tickets.events
+        - tickets.gopher
+        - tickets.guest
+        - tickets.staff
+        - tickets.visitors
+        - VendorMaint
+        - VisitorAddress

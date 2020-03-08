@@ -22,7 +22,7 @@ php bin/console doctrine:schema:update --force
 
 ## Create a client
 ```shell script
-php bin/console trikoder:oauth2:create-client --grant-type=password --scope=anplan
+php trikoder:oauth2:create-client --grant-type=password --grant-type=refresh_token --scope=anplan --redirect-uri=https://example.com
 ```
 
 Use the information shown in this command (or list-clients) in your authentication call.
