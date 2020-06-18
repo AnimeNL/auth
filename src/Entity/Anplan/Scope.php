@@ -47,4 +47,9 @@ class Scope
     {
         return $this->active;
     }
+
+    public function __toString(): string
+    {
+        return $this->scope;
+    }
 }

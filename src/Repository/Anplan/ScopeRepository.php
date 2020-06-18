@@ -26,4 +26,24 @@ class ScopeRepository extends ServiceEntityRepository
     {
         return $this->findBy(['active' => 1]);
     }
+
+    /**
+     * @return Scope[]
+     */
+    public function getUserScopes(int $userId, array $scopes): array
+    {
+        $qb = $this->createQueryBuilder('s');
+        $scopesConditions = [];
+        foreach ($scopes as $i => $scope) {
+            $scopesConditions[] = $qb->expr()->like('s.scope', ":scope$i");
+            $qb->setParameter("scope$i", $scope.'%');
+        }
+        $qb
+            ->where('s.active = 1')
+            ->andWhere('s.user = :user')
+            ->setParameter('user', $userId)
+            ->andWhere($qb->expr()->orX(...$scopesConditions));
+
+        return $qb->getQuery()->getResult();
+    }
 }
