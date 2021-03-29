@@ -5,7 +5,7 @@ RUN apk update && \
     apk add --no-cache git wget && \
     git clone https://github.com/AnimeNL/auth.git /var/www/auth
 
-COPY entrypoint.sh /entrypoint.sh
+COPY docker/entrypoint.sh /entrypoint.sh
 
 WORKDIR /var/www/auth
 RUN chmod +x /entrypoint.sh && \
