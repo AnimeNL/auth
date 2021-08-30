@@ -2,7 +2,7 @@ FROM php:7.4-fpm-alpine3.12
 
 # install composer
 RUN apk update && \
-    apk add --no-cache git wget && \
+    apk add --no-cache git wget tzdata && \
     git clone https://github.com/AnimeNL/auth.git /var/www/auth
 
 COPY docker/entrypoint.sh /entrypoint.sh
