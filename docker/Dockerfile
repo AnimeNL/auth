@@ -10,7 +10,7 @@ COPY docker/entrypoint.sh /entrypoint.sh
 WORKDIR /var/www/auth
 RUN chmod +x /entrypoint.sh && \
     mkdir -p var/oauth && \
-    wget https://getcomposer.org/download/1.10.19/composer.phar && \
+    wget https://getcomposer.org/download/2.2.6/composer.phar && \
     docker-php-ext-install pdo pdo_mysql && \
     php composer.phar install
 
