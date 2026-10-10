@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0903e125b4b346f7d49527e2bd128121",
+    "content-hash": "9371e880865f38c0dff33e5a029c1316",
     "packages": [
         {
             "name": "ajgarlag/psr-http-message-bundle",
