@@ -33,4 +33,4 @@ grumphp:
                 - "var/"
                 - "src/Migrations/"
         phpcsfixer2:
-            config: ".php_cs.dist"
+            config: ".php-cs-fixer.dist.php"
