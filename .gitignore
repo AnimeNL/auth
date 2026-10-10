@@ -16,5 +16,5 @@
 ###< idea ###
 ###> friendsofphp/php-cs-fixer ###
 /.php_cs
-/.php_cs.cache
+/.php-cs-fixer.cache
 ###< friendsofphp/php-cs-fixer ###

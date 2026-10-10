@@ -15,7 +15,7 @@ final class UserResolveListener
     public function __construct(
         UserProvider $userProvider,
         UserPasswordEncoderInterface $userPasswordEncoder,
-        bool $updatePassword = false
+        bool $updatePassword = false,
     ) {
         $this->userProvider = $userProvider;
         $this->userPasswordEncoder = $userPasswordEncoder;
