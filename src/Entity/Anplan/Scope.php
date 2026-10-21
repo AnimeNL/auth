@@ -6,13 +6,16 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="jpop__visitor_rights")
+ *
  * @ORM\Entity()
  */
 class Scope
 {
     /**
      * @ORM\Id()
+     *
      * @ORM\GeneratedValue()
+     *
      * @ORM\Column(type="integer", name="id")
      */
     private int $id;
@@ -29,6 +32,7 @@ class Scope
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Anplan\User", inversedBy="scopes")
+     *
      * @ORM\JoinColumn(name="vir_id_visitor", referencedColumnName="vis_id_visitor", nullable=false)
      */
     private User $user;

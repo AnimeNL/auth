@@ -10,13 +10,16 @@ use Trikoder\Bundle\OAuth2Bundle\Model\Scope as AuthScope;
 
 /**
  * @ORM\Table(name="jpop__visitors")
+ *
  * @ORM\Entity(repositoryClass="App\Repository\Anplan\UserRepository")
  */
 class User implements UserInterface, EncoderAwareInterface
 {
     /**
      * @ORM\Id()
+     *
      * @ORM\GeneratedValue()
+     *
      * @ORM\Column(type="integer", name="vis_id_visitor")
      */
     private int $id;
@@ -33,6 +36,7 @@ class User implements UserInterface, EncoderAwareInterface
 
     /**
      * @var ArrayCollection|Scope[]
+     *
      * @ORM\OneToMany(
      *     targetEntity="App\Entity\Anplan\Scope",
      *     mappedBy="user",
@@ -88,7 +92,7 @@ class User implements UserInterface, EncoderAwareInterface
      * and populated in any number of different ways when the user object
      * is created.
      *
-     * @return string[] The user roles
+     * @return string[]|list<AuthScope> The user roles
      */
     public function getRoles()
     {

@@ -1,4 +1,3 @@
-
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -7,11 +6,6 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-
-###> symfony/web-server-bundle ###
-/.web-server-pid
-###< symfony/web-server-bundle ###
-
 ###> squizlabs/php_codesniffer ###
 /.phpcs-cache
 /phpcs.xml
@@ -22,5 +16,5 @@
 ###< idea ###
 ###> friendsofphp/php-cs-fixer ###
 /.php_cs
-/.php_cs.cache
+/.php-cs-fixer.cache
 ###< friendsofphp/php-cs-fixer ###

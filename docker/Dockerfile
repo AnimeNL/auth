@@ -1,9 +1,6 @@
-FROM php:7.4-fpm-alpine3.12
+FROM php:8.4-fpm-alpine3.22
 
-# install composer
-RUN apk update && \
-    apk add --no-cache git wget tzdata && \
-    git clone https://github.com/AnimeNL/auth.git /var/www/auth
+COPY . /var/www/auth
 
 COPY docker/entrypoint.sh /entrypoint.sh
 
@@ -13,8 +10,6 @@ RUN chmod +x /entrypoint.sh && \
     wget https://getcomposer.org/download/2.2.6/composer.phar && \
     docker-php-ext-install pdo pdo_mysql && \
     php composer.phar install
-
-RUN apk del --purge git wget 
 
 RUN cat /entrypoint.sh
 RUN ls -al /var/www/auth/
