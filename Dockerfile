@@ -1,8 +1,8 @@
 FROM php:8.4-fpm-alpine3.24
 
-COPY . /var/www/auth
+COPY docker /var/www/auth
 
-COPY docker/entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 
 WORKDIR /var/www/auth
 RUN chmod +x /entrypoint.sh && \
