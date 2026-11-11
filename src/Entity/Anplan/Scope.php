@@ -26,11 +26,6 @@ class Scope
     private string $scope;
 
     /**
-     * @ORM\Column(type="smallint", name="vir_active")
-     */
-    private bool $active;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Anplan\User", inversedBy="scopes")
      *
      * @ORM\JoinColumn(name="vir_id_visitor", referencedColumnName="vis_id_visitor", nullable=false)
@@ -45,11 +40,6 @@ class Scope
     public function getScope(): string
     {
         return $this->scope;
-    }
-
-    public function isActive(): bool
-    {
-        return $this->active;
     }
 
     public function __toString(): string
