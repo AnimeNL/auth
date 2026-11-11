@@ -1,6 +1,6 @@
 FROM php:8.4-fpm-alpine3.24
 
-COPY docker /var/www/auth
+COPY . /var/www/auth
 
 COPY entrypoint.sh /entrypoint.sh
 
