@@ -98,10 +98,6 @@ class User implements UserInterface, EncoderAwareInterface
     {
         $scopes = [];
         foreach ($this->scopes->toArray() as $scope) {
-            if (!$scope->isActive()) {
-                continue;
-            }
-
             $scopes[] = new AuthScope($scope->getScope());
         }
 
