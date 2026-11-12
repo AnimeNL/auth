@@ -23,7 +23,7 @@ class ScopesDumpCommand extends Command
     {
         $this
             ->setName('animecon:scopes:dump')
-            ->setDescription('Get an array of active scopes to put in the config');
+            ->setDescription('Get an array of all scopes to put in the config');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
